@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
-export default function CardTable({ position, rotation = [0, 0, 0] }) {
-  const width = 20;
-  const height = 10;
+export default function CardHand({ position }) {
+  const width = 6;
+  const height = 9;
 
   const geometry = new THREE.PlaneGeometry(width, height);
   // const texture = new THREE.TextureLoader().load(
@@ -12,12 +12,12 @@ export default function CardTable({ position, rotation = [0, 0, 0] }) {
   const edges = new THREE.EdgesGeometry(geometry);
   const lineMaterial = new THREE.LineBasicMaterial({ color: "black" });
   const material = new THREE.MeshBasicMaterial({
-    color: "blue",
+    color: "red",
     depthTest: false,
   });
 
   return (
-    <group position={position} rotation={rotation}>
+    <group position={position} rotation={[Math.PI / 4, 0, 0]}>
       <mesh geometry={geometry} material={material} />
       <lineSegments geometry={edges} material={lineMaterial} />
     </group>

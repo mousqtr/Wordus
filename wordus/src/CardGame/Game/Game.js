@@ -13,6 +13,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // Import components
 import Table from "./Table";
 import CardTable from "./CardTable";
+import CardHand from "./CardHand";
 
 // Import style
 import "./Game.scss";
@@ -30,20 +31,6 @@ const CameraControls = () => {
   return <orbitControls ref={controls} args={[camera, domElement]} />;
 };
 
-function Card({ position }) {
-  const width = 0.5;
-  const height = 0.7;
-
-  const geometry = new THREE.PlaneGeometry(width, height);
-
-  const texture = new THREE.TextureLoader().load(
-    "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMC1leWUtMDItYy13b29kXzEuanBn.jpg"
-  );
-  const material = new THREE.MeshBasicMaterial({ map: texture });
-
-  return <mesh position={position} geometry={geometry} material={material} />;
-}
-
 export default function Game() {
   /**
    * Rendering function
@@ -51,7 +38,7 @@ export default function Game() {
   return (
     <div className="game">
       <Canvas
-        camera={{ position: [0, -120, 100], fov: 40 }}
+        camera={{ position: [0, -130, 100], fov: 40 }}
         gl={{ antialias: true }}
         onCreated={({ gl, scene }) => {
           // scene.add(new THREE.AxesHelper(20));
@@ -62,9 +49,35 @@ export default function Game() {
         <pointLight position={[100, 100, 100]} />
         <CameraControls />
         <Suspense fallback={<></>}>
+          {/* Table */}
           <Table />
+          {/* CardTable center */}
           <CardTable position={[0, 0, 5]} />
-          <Card position={[0, -50, 100]} />
+          {/* CardTable right */}
+          <CardTable position={[44, -12, 5]} />
+          <CardTable position={[44, -4, 5]} />
+          <CardTable position={[44, 4, 5]} />
+          <CardTable position={[44, 12, 5]} />
+          {/* CardTable left */}
+          <CardTable position={[-44, -12, 5]} />
+          <CardTable position={[-44, -4, 5]} />
+          <CardTable position={[-44, 4, 5]} />
+          <CardTable position={[-44, 12, 5]} />
+          {/* CardTable front */}
+          <CardTable position={[-12, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[-4, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[4, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[12, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
+          {/* CardTable bottom */}
+          <CardTable position={[-12, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[-4, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[4, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
+          <CardTable position={[12, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
+          {/* CardHand */}
+          <CardHand position={[-6, -93, 50]} />
+          <CardHand position={[-2, -93, 50]} />
+          <CardHand position={[2, -93, 50]} />
+          <CardHand position={[6, -93, 50]} />
         </Suspense>
       </Canvas>
     </div>
