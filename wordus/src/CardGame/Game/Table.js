@@ -4,7 +4,7 @@ export default function Table() {
   const shape = new THREE.Shape();
   const radius = 70;
   const points = [];
-  const sides = 5;
+  const sides = 7;
   for (let i = 0; i < sides; i++) {
     const angle = i * ((2 * Math.PI) / sides);
     points.push(

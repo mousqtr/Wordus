@@ -14,6 +14,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Table from "./Table";
 import CardTable from "./CardTable";
 import CardHand from "./CardHand";
+import CardsTable from "./CardsTable";
 
 // Import style
 import "./Game.scss";
@@ -53,26 +54,22 @@ export default function Game() {
           <Table />
           {/* CardTable center */}
           <CardTable position={[0, 0, 5]} />
-          {/* CardTable right */}
-          <CardTable position={[44, -12, 5]} />
-          <CardTable position={[44, -4, 5]} />
-          <CardTable position={[44, 4, 5]} />
-          <CardTable position={[44, 12, 5]} />
-          {/* CardTable left */}
-          <CardTable position={[-44, -12, 5]} />
-          <CardTable position={[-44, -4, 5]} />
-          <CardTable position={[-44, 4, 5]} />
-          <CardTable position={[-44, 12, 5]} />
-          {/* CardTable front */}
-          <CardTable position={[-12, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[-4, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[4, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[12, 40, 5]} rotation={[0, 0, Math.PI / 2]} />
-          {/* CardTable bottom */}
-          <CardTable position={[-12, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[-4, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[4, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
-          <CardTable position={[12, -35, 5]} rotation={[0, 0, Math.PI / 2]} />
+
+          {/* CardsTable */}
+          <CardsTable position={[0, -44, 5]} />
+          <CardsTable
+            position={[-35, -35, 5]}
+            rotation={[0, 0, -Math.PI / 3.5]}
+          />
+          <CardsTable position={[-49, 0, 5]} rotation={[0, 0, Math.PI / 2.4]} />
+          <CardsTable position={[-35, 35, 5]} rotation={[0, 0, Math.PI / 7]} />
+          <CardsTable position={[35, 35, 5]} rotation={[0, 0, -Math.PI / 7]} />
+          <CardsTable position={[49, 0, 5]} rotation={[0, 0, -Math.PI / 2.4]} />
+          <CardsTable
+            position={[35, -35, 5]}
+            rotation={[0, 0, Math.PI / 3.5]}
+          />
+
           {/* CardHand */}
           <CardHand position={[-6, -93, 50]} />
           <CardHand position={[-2, -93, 50]} />
