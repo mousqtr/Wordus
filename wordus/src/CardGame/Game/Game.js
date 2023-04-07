@@ -11,23 +11,11 @@ import {
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // Import components
-// import Box from "./Box";
+import Table from "./Table";
+import CardTable from "./CardTable";
 
 // Import style
 import "./Game.scss";
-
-function Plane({ color, ...props }) {
-  // const texture = useLoader(
-  //   THREE.TextureLoader,
-  //   "./img/activities/demo/stone.png"
-  // );
-  return (
-    <mesh receiveShadow castShadow {...props}>
-      <boxBufferGeometry />
-      {/* <meshBasicMaterial attach="material" map={texture} toneMapped={false} /> */}
-    </mesh>
-  );
-}
 
 extend({ OrbitControls });
 
@@ -42,28 +30,43 @@ const CameraControls = () => {
   return <orbitControls ref={controls} args={[camera, domElement]} />;
 };
 
-export default function Game () {
+function Card({ position }) {
+  const width = 0.5;
+  const height = 0.7;
 
+  const geometry = new THREE.PlaneGeometry(width, height);
+
+  const texture = new THREE.TextureLoader().load(
+    "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zMC1leWUtMDItYy13b29kXzEuanBn.jpg"
+  );
+  const material = new THREE.MeshBasicMaterial({ map: texture });
+
+  return <mesh position={position} geometry={geometry} material={material} />;
+}
+
+export default function Game() {
   /**
    * Rendering function
    */
-    return (
-      <div className="game">
-        <Canvas
-          camera={{ position: [0, -100, 100], fov: 55 }}
-          gl={{ antialias: true }}
-          onCreated={({ gl, scene }) => {
-            // scene.add(new THREE.AxesHelper(20));
-            gl.setPixelRatio(window.devicePixelRatio);
-          }}
-        >
-          <ambientLight intensity={0.7} />
-          <pointLight position={[100, 100, 100]} />
-          <CameraControls />
-          <Suspense fallback={<></>}>
-            <Plane position-z={0} scale={[100, 100, 1]} />
-          </Suspense>
-        </Canvas>
-      </div>
-    );
+  return (
+    <div className="game">
+      <Canvas
+        camera={{ position: [0, -120, 100], fov: 40 }}
+        gl={{ antialias: true }}
+        onCreated={({ gl, scene }) => {
+          // scene.add(new THREE.AxesHelper(20));
+          gl.setPixelRatio(window.devicePixelRatio);
+        }}
+      >
+        <ambientLight intensity={0.7} />
+        <pointLight position={[100, 100, 100]} />
+        <CameraControls />
+        <Suspense fallback={<></>}>
+          <Table />
+          <CardTable position={[0, 0, 5]} />
+          <Card position={[0, -50, 100]} />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
 }
